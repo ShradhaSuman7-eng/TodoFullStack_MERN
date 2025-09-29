@@ -1,8 +1,8 @@
 import "./App.css";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import PageNotfound from "./components/PageNotfound";
-import { Home } from "./components/Home";
+import Login from "./components/Login.jsx";
+import Signup from "./components/Signup.jsx";
+import PageNotfound from "./components/PageNotfound.jsx";
+import { Home } from "./components/Home.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
