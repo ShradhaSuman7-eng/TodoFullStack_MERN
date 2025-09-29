@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const Home = () => {
   const [todos, setTodos] = useState([]);
@@ -15,7 +16,7 @@ export const Home = () => {
     const fetchTodos = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:8000/todo/fetch", {
+        const response = await axios.get(`${BASE_URL}/todo/fetch`, {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         });
@@ -36,7 +37,7 @@ export const Home = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/todo/create",
+        `${BASE_URL}/todo/create`,
         { text: newTodo, completed: false },
         { withCredentials: true }
       );
@@ -53,7 +54,7 @@ export const Home = () => {
     try {
       const todo = todos.find((t) => t._id === id);
       const response = await axios.put(
-        `http://localhost:8000/todo/update/${id}`,
+        `${BASE_URL}/todo/update/${id}`,
         { ...todo, completed: !todo.completed },
         { withCredentials: true }
       );
@@ -67,7 +68,7 @@ export const Home = () => {
   // Delete a todo
   const todoDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/todo/delete/${id}`, {
+      await axios.delete(`${BASE_URL}/todo/delete/${id}`, {
         withCredentials: true,
       });
       setTodos(todos.filter((t) => t._id !== id));
@@ -80,7 +81,7 @@ export const Home = () => {
   // Logout user
   const logout = async () => {
     try {
-      await axios.get("http://localhost:8000/user/logout", {
+      await axios.get("${BASE_URL}/user/logout", {
         withCredentials: true,
       });
       toast.success("User logged out successfully");
